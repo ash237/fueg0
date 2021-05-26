@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="GF_ass_sets_portal.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="GF Portal0000" x="9" y="9" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0001" x="753" y="9" width="740" height="691" frameX="0" frameY="-27" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0002" x="753" y="9" width="740" height="691" frameX="0" frameY="-27" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0003" x="1498" y="9" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0004" x="2241" y="9" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0005" x="2984" y="9" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0006" x="9" y="9" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0007" x="9" y="730" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0008" x="9" y="730" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0009" x="2241" y="9" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0010" x="2241" y="9" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0011" x="2984" y="9" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0012" x="9" y="9" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0013" x="9" y="730" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0014" x="9" y="730" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0015" x="752" y="730" width="740" height="718" frameX="0" frameY="0" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0016" x="752" y="730" width="740" height="718" frameX="0" frameY="0" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0017" x="1497" y="730" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0018" x="2241" y="730" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0019" x="2985" y="730" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0020" x="9" y="1453" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0021" x="752" y="1453" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0022" x="752" y="1453" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0023" x="2241" y="730" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0024" x="2241" y="730" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0025" x="2985" y="730" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0026" x="9" y="1453" width="738" height="689" frameX="-2" frameY="-29" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0027" x="752" y="1453" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0028" x="752" y="1453" width="738" height="716" frameX="-2" frameY="-2" frameWidth="741" frameHeight="718"/>
+	<SubTexture name="GF Portal0029" x="2241" y="730" width="739" height="695" frameX="-2" frameY="-23" frameWidth="741" frameHeight="718"/>
+</TextureAtlas>

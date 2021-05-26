@@ -17,3 +17,5 @@ senpai-angry
 spirit
 fueg0
 fueg1
+fueg0-cutscene
+bf-tabi

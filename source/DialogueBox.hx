@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.FlxSound;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.text.FlxTypeText;
@@ -33,6 +34,10 @@ class DialogueBox extends FlxSpriteGroup
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
+	var voiceLine:FlxSound;
+	var curDialogue:Int = 0;
+
+	var linesPrefix:String = '';
 
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
@@ -46,6 +51,9 @@ class DialogueBox extends FlxSpriteGroup
 			case 'thorns':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'escape reality' | 'limit' | 'shock':
+				/*FlxG.sound.playMusic(Paths.music('bad', 'noke'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);*/
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -61,7 +69,7 @@ class DialogueBox extends FlxSpriteGroup
 		}, 5);
 
 		box = new FlxSprite(-20, 45);
-		
+		voiceLine = new FlxSound();
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
 		{
@@ -87,6 +95,16 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
+			case 'escape reality' | 'limit' | 'shock':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				box.y += 320;
+				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
+				box.animation.addByIndices('normal', 'speech bubble normal', [11], "", 24);
+
+				/*var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/senpaiPortait', 'week6'));
+				face.setGraphicSize(Std.int(face.width * 6));
+				add(face);*/
 		}
 
 		this.dialogueList = dialogueList;
@@ -94,39 +112,64 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 		
-		portraitLeft = new FlxSprite(-20, 40);
-		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-		portraitLeft.updateHitbox();
-		portraitLeft.scrollFactor.set();
+		switch (PlayState.SONG.song.toLowerCase()) {
+			case 'escape reality' | 'limit' | 'shock':
+				portraitRight = new FlxSprite(0, 0);
+				portraitLeft = new FlxSprite(-60, 40).loadGraphic(Paths.image('Fueg0Happy', 'fueg0'));
+				portraitRight = new FlxSprite(-60, 40).loadGraphic(Paths.image('portraits/gf', 'fueg0'));
+				handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox', 'week6'));
+			default:
+				portraitRight = new FlxSprite(0, 40);
+				portraitLeft = new FlxSprite(-20, 40);
+				portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
+				portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
+				portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
+				portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+				portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+				handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+				box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
+		}
+		
+		switch(PlayState.SONG.song.toLowerCase()) {
+			case 'shock':
+				linesPrefix = 'shock';
+			case 'limit':
+				linesPrefix = 'Limit';
+			case 'escape reality':
+				linesPrefix = 'escapereality';
+		}
+		
 		add(portraitLeft);
 		portraitLeft.visible = false;
-
-		portraitRight = new FlxSprite(0, 40);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+		
+		portraitLeft.updateHitbox();
+		portraitLeft.scrollFactor.set();
+		
 		portraitRight.updateHitbox();
 		portraitRight.scrollFactor.set();
 		add(portraitRight);
 		portraitRight.visible = false;
 		
 		box.animation.play('normalOpen');
-		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
+		
 		box.updateHitbox();
 		add(box);
 
 		box.screenCenter(X);
 		portraitLeft.screenCenter(X);
+		switch (PlayState.SONG.song.toLowerCase()) {
+			case 'escape reality' | 'limit' | 'shock':
+				//offset stuff
+		}
 
-		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+		
 		add(handSelect);
 
 
 		if (!talkingRight)
 		{
-			// box.flipX = true;
+			box.flipX = true;
 		}
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
@@ -151,15 +194,14 @@ class DialogueBox extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 		// HARD CODING CUZ IM STUPDI
-		if (PlayState.SONG.song.toLowerCase() == 'roses')
-			portraitLeft.visible = false;
-		if (PlayState.SONG.song.toLowerCase() == 'thorns')
-		{
-			portraitLeft.color = FlxColor.BLACK;
-			swagDialogue.color = FlxColor.WHITE;
-			dropText.color = FlxColor.BLACK;
+		switch (PlayState.SONG.song.toLowerCase()) {
+			case 'roses':
+				portraitLeft.visible = false;
+			case 'thorns':
+				portraitLeft.color = FlxColor.BLACK;
+				swagDialogue.color = FlxColor.WHITE;
+				dropText.color = FlxColor.BLACK;
 		}
-
 		dropText.text = swagDialogue.text;
 
 		if (box.animation.curAnim != null)
@@ -170,7 +212,9 @@ class DialogueBox extends FlxSpriteGroup
 				dialogueOpened = true;
 			}
 		}
-
+		if (FlxG.mouse.justPressed) {
+			voiceLine.play();
+		}
 		if (dialogueOpened && !dialogueStarted)
 		{
 			startDialogue();
@@ -231,7 +275,12 @@ class DialogueBox extends FlxSpriteGroup
 		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
-
+		curDialogue++;
+		if (voiceLine.playing)
+			voiceLine.stop();
+		voiceLine = voiceLine.loadEmbedded(Paths.sound(linesPrefix + '/' + linesPrefix + Std.string(curDialogue), 'fueg0'));
+		trace(linesPrefix + Std.string(curDialogue));
+		voiceLine.play();
 		switch (curCharacter)
 		{
 			case 'dad':
@@ -239,14 +288,64 @@ class DialogueBox extends FlxSpriteGroup
 				if (!portraitLeft.visible)
 				{
 					portraitLeft.visible = true;
+					box.flipX = true;
 					portraitLeft.animation.play('enter');
 				}
+			case 'fueg0happy':
+				portraitRight.visible = false;
+				remove(portraitLeft);
+				portraitLeft = new FlxSprite(-300, -250).loadGraphic(Paths.image('portraits/Fueg0Happy', 'fueg0'));
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * 0.3));
+				add(portraitLeft);
+				portraitLeft.visible = true;
+				box.flipX = true;
+			case 'fueg0mad':
+				portraitRight.visible = false;
+				remove(portraitLeft);
+				portraitLeft = new FlxSprite(-180, -100).loadGraphic(Paths.image('portraits/Fueg0Mad', 'fueg0'));
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * 0.4));
+				add(portraitLeft);
+				portraitLeft.visible = true;
+				box.flipX = true;
+			case 'gf':
+				portraitLeft.visible = false;
+				remove(portraitRight);
+				portraitRight = new FlxSprite(800, 80).loadGraphic(Paths.image('portraits/gf', 'fueg0'));
+				//portraitRight.setGraphicSize(Std.int(portraitLeft.width * 0.4));
+				add(portraitRight);
+				portraitRight.visible = true;
+				box.flipX = false;
+			case 'gfcheer':
+				portraitLeft.visible = false;
+				remove(portraitRight);
+				portraitRight = new FlxSprite(800, 80).loadGraphic(Paths.image('portraits/gfportrait', 'fueg0'));
+				//portraitRight.setGraphicSize(Std.int(portraitLeft.width * 0.4));
+				add(portraitRight);
+				portraitRight.visible = true;
+				box.flipX = false;
+			case 'gftalk':
+				portraitLeft.visible = false;
+				remove(portraitRight);
+				portraitRight = new FlxSprite(800, 80).loadGraphic(Paths.image('portraits/gftalking', 'fueg0'));
+				//portraitRight.setGraphicSize(Std.int(portraitLeft.width * 0.4));
+				add(portraitRight);
+				portraitRight.visible = true;
+				box.flipX = false;
 			case 'bf':
+				portraitLeft.visible = false;
+				remove(portraitRight);
+				portraitRight = new FlxSprite(800, 80).loadGraphic(Paths.image('portraits/bfportrait', 'fueg0'));
+				//portraitRight.setGraphicSize(Std.int(portraitLeft.width * 0.4));
+				add(portraitRight);
+				portraitRight.visible = true;
+				box.flipX = false;
+			case 'none':
 				portraitLeft.visible = false;
 				if (!portraitRight.visible)
 				{
-					portraitRight.visible = true;
-					portraitRight.animation.play('enter');
+					portraitRight.visible = false;
+					box.flipX = false;
+					//portraitRight.animation.play('enter');
 				}
 		}
 	}
